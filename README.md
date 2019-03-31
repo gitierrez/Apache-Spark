@@ -96,7 +96,7 @@ The `SparkContext` determines how many resources are allotted to each executor, 
 
 A Spark job is the set of RDD transformations needed to compute one final result. Each stage corresponds to a segment of work, which can be accomplished without moving data across the partitions. Within one stage, tasks are the units of work done for each partition of the data.
 
-<img src='imgs/spark_execution.png' width=600>
+<img src='imgs/spark_execution.PNG' width=600>
 
 ---
 
@@ -350,7 +350,7 @@ In general, joins are expensive since they require that corresponding keys from 
 
 >Two RDDs will be colocated if they have the same partitioner and were shuffled as part of the same action. If the RDDs are colocated, both the network transfer and the shuffle can be avoided.
 
-<img src='imgs/colocation.png' width=600>
+<img src='imgs/colocation.PNG' width=600>
 
 In order to join data, Spark needs the data that is to be joined to live on the same partition. The default implementation of a *join* in Spark is a *shuffled hash join*, which partitions the second dataset with the same default partitioner as the first, so that the keys with the same hash value from both datasets are in the same partition. This shuffling can be avoided through:
 
@@ -454,7 +454,7 @@ To summarize: *wide* transformations require a shuffle, while *narrow* transform
 
 In *narrow* transformations, the child partitions (the partitions in the resulting RDD) depend on a known subset of the parent partitions. In *wide* transformations, multiple child partitions may depend on multiple partitions of the parent RDD.
 
-<img src='imgs/narrow-v-wide.png' width=600>
+<img src='imgs/narrow-v-wide.PNG' width=600>
 
 Narrow dependencies do not required data to be moved across partitions. Consequently, narrow transformations don't require communication with the driver node. Each series of narrow transformations can be computed in the same *stage* of the query execution plan. In contrast, transformations with wide dependencies may require data to be moved across partitions. Thus, the downstream computations cannot be computed before the shuffle finishes.
 
@@ -551,7 +551,7 @@ Useful to prevent failures and a high cost of recomputation by saving intermedia
 
 Checkpointing writes the RDD to an external storage system such as HDFS or S3, and forgets the RDD's lineage. Since checkpointing requires writing the RDD outside of Spark, checkpointed information survives beyond the duration of a single Spark application and forces evaluation of an RDD.
 
-<img src='imgs/persisting.png' width=600>
+<img src='imgs/persisting.PNG' width=600>
 
 ---
 
